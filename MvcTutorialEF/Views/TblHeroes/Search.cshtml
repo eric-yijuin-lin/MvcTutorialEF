@@ -4,7 +4,7 @@
     ViewData["Title"] = "Search";
 }
 
-<h1>Edit</h1>
+<h1>Search</h1>
 
 <h4>HeroSearch</h4>
 <hr />
@@ -13,6 +13,7 @@
         <form asp-action="Search">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                @*asp-for 用來在頁面指定表單的 input 要跟 Model 的哪個屬性綁定*@
                 <label asp-for="SearchParams.MinAtk" class="control-label"></label>
                 <input asp-for="SearchParams.MinAtk" class="form-control" />
                 <span asp-validation-for="SearchParams.MinAtk" class="text-danger"></span>
@@ -25,7 +26,7 @@
             <div class="form-group">
                 <label asp-for="SearchParams.Gender" class="control-label"></label>
                 <select asp-for="SearchParams.Gender" 
-                asp-items="@(new SelectList(Model.GenderOptions, "OptionValue", "DisplayText"))"
+                asp-items="@Model.GenderSelectList"
                 class="form-control" ></select>
                 <span asp-validation-for="SearchParams.Gender" class="text-danger"></span>
             </div>

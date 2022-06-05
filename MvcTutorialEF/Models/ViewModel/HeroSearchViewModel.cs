@@ -3,23 +3,25 @@
 namespace MvcTutorialEF.Models.ViewModel
 {
     public class HeroSearchViewModel
-    {        // 搜尋條件
+    {   
+        private readonly List<GenderOptions> _genderOptions = new List<GenderOptions>
+        {
+            new GenderOptions() { DisplayText = "男", OptionValue = "male"},
+            new GenderOptions() { DisplayText = "女", OptionValue = "female"},
+        };
+        // 搜尋條件
         public HeroSearchParams SearchParams { get; set; }
         // 搜尋結果(英雄們)
         public List<TblHero> Heroes { get; set; }
         // 下拉選單選項
-        public List<GenderOptions> GenderOptions { get; set; }
+        public SelectList GenderSelectList { get; set; }
 
         public HeroSearchViewModel()
         {
             // 初始化記憶體 => 把房間打掃乾淨，才能入住
             SearchParams = new HeroSearchParams();
             Heroes = new List<TblHero>();
-            GenderOptions = new List<GenderOptions>
-            {
-                new GenderOptions() { DisplayText = "男", OptionValue = "male"},
-                new GenderOptions() { DisplayText = "女", OptionValue = "female"},
-            };
+            GenderSelectList = new SelectList(_genderOptions, "OptionValue", "DisplayText");
         }
     }
     public class HeroSearchParams
