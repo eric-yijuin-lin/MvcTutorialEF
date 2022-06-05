@@ -1,0 +1,83 @@
+﻿@model MvcTutorialEF.Models.ViewModel.HeroSearchViewModel
+@*cshtml => Razor => C# + html*@
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Edit</h1>
+
+<h4>HeroSearch</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Search">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SearchParams.MinAtk" class="control-label"></label>
+                <input asp-for="SearchParams.MinAtk" class="form-control" />
+                <span asp-validation-for="SearchParams.MinAtk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchParams.MaxAtk" class="control-label"></label>
+                <input asp-for="SearchParams.MaxAtk" class="form-control" />
+                <span asp-validation-for="SearchParams.MaxAtk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchParams.Gender" class="control-label"></label>
+                <select asp-for="SearchParams.Gender" 
+                asp-items="@(new SelectList(Model.GenderOptions, "OptionValue", "DisplayText"))"
+                class="form-control" ></select>
+                <span asp-validation-for="SearchParams.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<h4>@ViewData["Message"]</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Heroes[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Heroes[0].Atk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Heroes[0].Hp)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@model 宣告*@
+        @*@Model 使用*@
+@foreach (var item in Model.Heroes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Atk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hp)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    @*Partial View*@
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

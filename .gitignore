@@ -1,0 +1,4 @@
+bin/
+obj/
+.vs/
+/MvcTutorialEF/appsettings.Development.json
