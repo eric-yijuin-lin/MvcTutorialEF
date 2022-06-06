@@ -1,0 +1,32 @@
+﻿@*Grid System 網格系統*@
+@*Block = 區塊元素
+Inline = 行內元素*@
+
+@*Bootstrap 的網格系統把空間分成 12 等分*@
+@*用 container 包 row ==> row 包 column  ==> column 再包真正的內容元素*@
+@*column 的 class 可以指定這個 column 要佔幾等分的空間，例如 col-4 就代表 4/12 也就是 1/3*@
+
+@*Partial View*@
+@*消失的 DOCTYPE
+<body></body>*@
+
+@*Alt + 上下*@
+@*col-sm-12   col-lg-6*@
+<div class="row" id="main-div">
+    <div class="col-4">
+        <h1 class="text-white bg-secondary">顏色測試1</h1>
+    </div>
+    <div class="col-4">
+        <h1 class="text-white bg-secondary">顏色測試2</h1>
+    </div>
+    <div class="col-4">
+        <h1 class="text-white bg-secondary">顏色測試3</h1>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        $("#main-div").addClass("bg-info")
+    </script>
+}

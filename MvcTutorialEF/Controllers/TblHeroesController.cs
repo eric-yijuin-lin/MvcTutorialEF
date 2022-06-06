@@ -25,9 +25,9 @@ namespace MvcTutorialEF.Controllers
         public IActionResult Index()
         {
             // ? : 三元運算子
-              return _context.TblHeroes != null ? 
-                          View (_context.TblHeroes.ToList()) :
-                          Problem("Entity set 'HomeworkDBContext.TblHeroes'  is null.");
+            return _context.TblHeroes != null ?
+                        View(_context.TblHeroes.ToList()) :
+                        Problem("Entity set 'HomeworkDBContext.TblHeroes'  is null.");
         }
 
         // GET: TblHeroes/Details/5
@@ -158,7 +158,7 @@ namespace MvcTutorialEF.Controllers
             {
                 _context.TblHeroes.Remove(tblHero);
             }
-            
+
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -185,10 +185,20 @@ namespace MvcTutorialEF.Controllers
 
             return View(viewModel);
         }
+        public async Task<IActionResult> GetDummySelectList()
+        {
+            await Task.Delay(3000);
+            return Json(new List<DemoListItem>()
+            {
+                new DemoListItem() { Name = "選項 1", Value = "value 1" },
+                new DemoListItem() { Name = "選項 2", Value = "value 2" },
+                new DemoListItem() { Name = "選項 3", Value = "value 3" },
+            });
+        }
 
         private bool TblHeroExists(int id)
         {
-          return (_context.TblHeroes?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.TblHeroes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
